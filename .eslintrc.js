@@ -1,8 +1,7 @@
 module.exports = {
   env: {
-    es6: true,
-    jest: true,
     browser: true,
+    es6: true,
   },
   extends: [
     'airbnb',
@@ -12,8 +11,8 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    __DEV__: true,
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -22,7 +21,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react', 'jsx-a11y', 'import', 'babel-plugin-root-import', 'react-hooks', 'prettier'
+    'react', 'jsx-a11y', 'import', 'eslint-plugin-import', 'react-hooks', 'prettier'
   ],
   rules: {
     "prettier/prettier": "error",
@@ -42,7 +41,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       "babel-plugin-root-import": {
-        rootPathSuffix: "src"
+        rootPathSuffix: "src",
       },
     },
   },
@@ -50,4 +49,3 @@ module.exports = {
 
 // eslint-disable-line :: para desabilitar o eslint em uma linha
 // eslint-disable-next-line prefer-object-spread // desabilitar linha seguinte
-
