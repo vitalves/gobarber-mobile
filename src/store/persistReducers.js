@@ -1,14 +1,14 @@
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { persistReducer } from 'redux-persist';
 
 export default reducers => {
   const persistedReducer = persistReducer(
     {
       key: 'gobarber',
-      storage,
+      storage: AsyncStorage,
       whitelist: ['auth', 'user'], // reducers que devem ser armazenados (apenas)
     },
-    reducers
+    reducers,
   );
 
   return persistedReducer;

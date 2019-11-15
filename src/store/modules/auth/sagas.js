@@ -1,7 +1,7 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects';
-import { toast } from 'react-toastify'; // notificações
+import { Alert } from 'react-native';
 
-import history from '~/services/history';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
+
 import api from '~/services/api';
 
 import { signInSuccess, signFailure } from './actions';
@@ -18,12 +18,11 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!user.provider) {
-      // console.tron.warn('Nao prestador');
-      toast.error('Esse usuário não é um prestador de serviços', {
-        position: 'top-center',
-        autoClose: 5000,
-      });
+    if (user.provider) {
+      Alert.alert(
+        'Erro no Login',
+        'O usuário não pode ser prestador de serviços',
+      );
       return;
     }
 
@@ -33,13 +32,12 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados!', {
-      position: 'top-center',
-      autoClose: 3000,
-      width: '500px',
-    });
+    Alert.alert(
+      'Falha na autenticação',
+      'Houve um erro no login, verifique seus dados',
+    );
 
     yield put(signFailure());
   }
@@ -57,17 +55,14 @@ export function* signUp({ payload }) {
       provider: true,
     });
 
-    toast.success('Cadastro realizado com sucesso', {
-      position: 'top-center',
-      autoClose: 3000,
-    });
+    Alert.alert('Sucesso', 'Seu cadastro foi realizado');
 
-    history.push('/');
+    // history.push('/');
   } catch (err) {
-    toast.error('Falha ao realizar o cadastro, verifique seus dados', {
-      position: 'top-center',
-      autoClose: 3000,
-    });
+    Alert.alert(
+      'Falha no cadastro',
+      'Houve um erro ao realizar o cadastro, verifique seus dados',
+    );
   }
 }
 
@@ -83,9 +78,9 @@ export function setToken({ payload }) {
 }
 
 export function signOut() {
-  toast.success('Você foi deslogado com  sucesso!');
+  Alert.alert('Sucesso', 'Você foi deslogado da sua conta');
 
-  history.push('/');
+  // history.push('/');
 }
 
 // sempre que ouvir '@auth/SIGN_IN_REQUEST' chama a funcao signIn:
