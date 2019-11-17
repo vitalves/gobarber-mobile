@@ -8,6 +8,7 @@ import SignUp from '~/pages/SignUp';
 
 // logado:
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 /*
 export default createAppContainer(
@@ -29,9 +30,23 @@ export default (signedIn = false) =>
           SignUp,
         }),
         // Rotas para usuário logado:
-        App: createBottomTabNavigator({
-          Dashboard,
-        }),
+        App: createBottomTabNavigator(
+          {
+            Dashboard,
+            Profile,
+          },
+          // configuracoes da createBottomTabNavigator:
+          {
+            tabBarOptions: {
+              keyboardHidesTabBar: true,
+              activeTintColor: '#FFF',
+              inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
+              style: {
+                backgroundColor: '#8d41a8',
+              },
+            },
+          },
+        ),
       },
       // configuracao de rota padrão:
       {
