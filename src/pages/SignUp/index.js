@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { Image } from 'react-native';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
@@ -30,6 +30,8 @@ export default function SignUp({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
@@ -74,7 +76,9 @@ export default function SignUp({ navigation }) {
             onChangeText={setPassword}
           />
 
-          <SubmitButton onPress={() => {}}>Criar Conta</SubmitButton>
+          <SubmitButton loading={loading} onPress={() => handleSubmit}>
+            Criar Conta
+          </SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>
