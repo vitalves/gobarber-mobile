@@ -80,8 +80,6 @@ export function setToken({ payload }) {
 
 export function signOut() {
   Alert.alert('Sucesso', 'Você foi deslogado da sua conta');
-
-  // history.push('/');
 }
 
 // sempre que ouvir '@auth/SIGN_IN_REQUEST' chama a funcao signIn:
