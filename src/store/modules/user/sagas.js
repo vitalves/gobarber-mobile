@@ -7,12 +7,12 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, avatar_id, ...rest } = payload.data;
+    const { name, email, ...rest } = payload.data;
 
     // Object.assign serve para unir objetos:
     // eslint-disable-next-line prefer-object-spread
     const profile = Object.assign(
-      { name, email, avatar_id },
+      { name, email },
       rest.oldPassword ? rest : {},
     );
 
