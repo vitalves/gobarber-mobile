@@ -55,6 +55,7 @@ export default (signedIn = false) =>
                 {
                   // padroes para as paginas
                   headerLayoutPreset: 'center',
+                  headerBackTitleVisible: 'false',
                   defaultNavigationOptions: {
                     headerTransparent: true,
                     headerTintColor: '#FFF',
