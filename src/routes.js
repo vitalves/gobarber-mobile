@@ -84,6 +84,7 @@ export default (signedIn = false) =>
           },
           // configuracoes da createBottomTabNavigator:
           {
+            resetOnBlur: true,
             tabBarOptions: {
               keyboardHidesTabBar: true,
               activeTintColor: '#FFF',
