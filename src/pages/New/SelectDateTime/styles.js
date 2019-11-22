@@ -6,6 +6,20 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
+export const Unavailable = styled.View`
+  flex: 1;
+  margin: 0 30px 30px;
+  background: rgba(255, 248, 220, 0.8);
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+`;
+
+export const UnavailableText = styled.Text`
+  color: #7159c1;
+`;
+
 export const HourList = styled.FlatList.attrs({
   numColumns: 2,
   showsVerticalScrollIndicator: false,

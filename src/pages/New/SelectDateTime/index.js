@@ -8,11 +8,19 @@ import api from '~/services/api';
 import Background from '~/components/Background';
 import DateInput from '~/components/DateInput';
 
-import { Container, HourList, Hour, Title } from './styles';
+import {
+  Container,
+  HourList,
+  Hour,
+  Title,
+  Unavailable,
+  UnavailableText,
+} from './styles';
 
 export default function SelectDateTime({ navigation }) {
   const [date, setDate] = useState(new Date());
   const [hours, setHours] = useState([]);
+  const [unavailable, setUnavailable] = useState(false);
 
   const provider = navigation.getParam('provider');
 
@@ -23,12 +31,20 @@ export default function SelectDateTime({ navigation }) {
           date: date.getTime(),
         },
       });
-
       setHours(response.data);
+      setUnavailable(false);
     }
 
     loadAvailable();
   }, [date, provider.id]);
+
+  useEffect(() => {
+    const countAvailable = hours.find(h => h.available === true);
+
+    if (!countAvailable) {
+      setUnavailable(true);
+    }
+  }, [hours]);
 
   function handleSelectHour(time) {
     navigation.navigate('Confirm', {
@@ -41,6 +57,14 @@ export default function SelectDateTime({ navigation }) {
     <Background>
       <Container>
         <DateInput date={date} onChange={setDate} />
+
+        {unavailable && (
+          <Unavailable>
+            <UnavailableText>
+              Desculpe, não há horário disponível para essa data!
+            </UnavailableText>
+          </Unavailable>
+        )}
 
         <HourList
           data={hours}
